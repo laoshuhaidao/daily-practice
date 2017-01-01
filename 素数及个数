@@ -1,0 +1,58 @@
+//求整数n以内的素数及个数
+
+#include <iostream>  
+using namespace std;
+
+struct node
+{
+	int data;
+	node *next;
+};
+
+void numprime(int n)
+{
+	node *head = new node;
+	head->next = NULL;
+	head->data = 2;
+	node *tail = head;
+	for (int i = 3; i < n; i++)
+	{
+		int remainder;
+		node *ptr = head;
+		while (ptr != NULL)
+		{
+			remainder = i%ptr->data;
+			if (remainder == 0)
+				break;
+			else
+				ptr = ptr->next;
+		}
+		if (remainder != 0)
+		{
+			node *new_ptr = new node;
+			new_ptr->data = i;
+			new_ptr->next = NULL;
+			tail->next = new_ptr;
+			tail = new_ptr;	
+		}
+	}
+	int result = 0;
+	cout << n << "以内的素数为：";
+	while (head != NULL)
+	{
+		result++;
+		node *temp = head;
+		cout << temp->data<<" ";
+		head = head->next;
+		delete temp;
+	}
+	cout << endl;
+	cout << n << "以内素数的个数为：" << result << endl;
+}
+
+int main()
+{
+	numprime(100);
+	//cin.get();
+	return 0;
+}
