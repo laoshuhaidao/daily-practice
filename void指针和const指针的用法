@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a=1;
+    int b=10;
+    
+    int *p1=&a;
+    void *p2=p1;        //void指针的用法
+    int *p3=(int *)p2;
+    //cout<<"*p2= "<<*p2<<endl;//报错
+    cout<<"*p3= "<<*p3<<endl;
+    
+    const int *p4=&a;  //可以改变其指向
+    p4=&b;
+    //*p4=b;//报错
+    cout<<"*p4= "<<*p4<<endl;
+    
+    int * const p5=&a;//可以改变其指向的值
+    //p5=&b;//报错
+    *p5=b;
+    cout<<"*p5= "<<*p5<<endl;
+    
+    const int * const p6=&a;
+    //p6=&b;//报错
+    //*p6=b;//报错
+    cout<<"*p6= "<<*p6<<endl;
+    
+    return 0;
+}
