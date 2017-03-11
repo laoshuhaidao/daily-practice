@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a[5]={10,20,30,40,50};
+    int *pa,*pb;
+    pa=&a;//pa=a;
+    pb=&a[4];
+    cout<<"*pa="<<*pa<<endl;//10
+    cout<<"*pb="<<*pb<<endl;//50
+    cout<<"pa>pb?"<<((pa>pb)?"true":"false")<<endl;//false
+    cout<<"*(pa+2)="<<*(pa+2)<<endl;//30
+    cout<<"*(pa++)="<<*(pa++)<<endl;//10
+    cout<<"*(++pa)="<<*(++pa)<<endl;//20
+    cout<<"*(pb--)="<<*(pb--)<<endl;//50
+    cout<<"*(--pb)="<<*(--pb)<<endl;//40
+    cout<<"*(pb-pa)="<<pb-pa<<endl;//4
+    cout<<"pb==pa?"<<((pb==pa)?"true":"false")<<endl;//true
+    cout<<"pa!=0?"<<((pa!=0)?"true":"false")<<endl;//true
+    return 0;
+}
