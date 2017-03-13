@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int max(int x, int y)
+{
+	return (x > y ? x : y);
+}
+
+int main()
+{
+	int(*p)(int, int);   //定义函数指针
+	int a, b, c;
+
+	p = max;             //初始化函数指针
+	cout << "请输入两个数字:" ;
+	cin >> a >> b;
+	c = (*p)(a, b);      //通过函数指针调用函数
+	cout << "max(a,b)=" << c << endl;
+
+	return 0;
+}
