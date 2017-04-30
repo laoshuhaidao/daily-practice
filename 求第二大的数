@@ -1,0 +1,21 @@
+//找一个整数数组中第二大的数
+const int MIN=-32767;
+int findSecondMax(int data[],int n)
+{
+    int max=data[0];
+    int sec_max=MIN;
+    for(int i=1;i<n;i++)
+    {
+        if(data[i]>max)
+        {
+            sec_max=max;
+            max=data[i];
+        }
+        else
+        {
+            if(data[i]>sec_max)
+                sec_max=data[i];
+        }
+    }
+    return sec_max;
+}
