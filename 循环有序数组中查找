@@ -1,0 +1,22 @@
+//在循环有序数组中查找
+bool search(int a[],int low,int high,int x)
+{
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        if(x==a[mid]) return mid;
+        else if(a[low]<=a[mid])//例如：3456|7|8912
+        {
+            if(x>a[mid]) low=mid+1;//(8912)
+            else if(x<a[low]) low=mid+1;//(8912)
+            else high=mid-1;//(3456)
+        }
+        else                  //例如：8912|3|4567
+        {
+            if(x<a[mid]) high=mid-1;//(8912)
+            else if(x<a[low]) low=mid+1;//(4567)
+            else high=mid-1;//(8912)
+        }
+    }
+    return false;
+}
