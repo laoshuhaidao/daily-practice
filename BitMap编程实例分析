@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+#define BITWORD 32
+#define SHIFT 5    //左移相当于乘32，右移相当于除32，i>>SHIFT=i/32
+#define MASK 0x1F  //0x1F(16)=31(10)，i&MASK=i%32(m%n=m&(n-1),n=2^x)
+#define N 10000000
+int a[N/BITWORD+1];
+
+void BitMap_set(int n)//将第i位设置为1
+{
+    a[n>>SHIFT] |=(1<<(n&MASK));//1<<(n%32),即第i位为1,其余位为0，a[n/32]|=(1<<(n%32)),即将a[n/32]的第i位设为1
+}
+
+void BitMap_clr(int n)//将第i位设置为0
+{
+    a[n>>SHIFT] &=~(1<<(n&MASK));//~(1<<(n%32)),即第i位为0,其余位为1，a[n/32]&=~(1<<(n%32)),即将a[n/32]的第i位设为0
+}
+
+int BitMap_exit(int n)//返回第i位的状态
+{
+    return a[n>>SHIFT] & (1<<(n&MASK));//第i位为1,其余位为0，a[n>>SHIFT] & (1<<(n&MASK)),如果第i位为0，结果为0，如果第i位为1，结果不为0
+}
+
+void Show(int n)
+{
+    for(int i=0;i<n;++i)
+    {
+        vector<int> vec;
+        int tmp=a[i];
+        for(int i=0;i<32;++i)
+        {
+            vec.push_back(tmp&1);
+            tmp>>=1;
+        }
+        cout<<"a["<<i<<"]"<<":"<<i*32+1<<"~"<<(i+1)*32<<"->";
+        for(int i = vec.size()-1;i >= 0;--i)
+            cout<<vec[i]<<" ";
+        cout<<endl;
+    }
+}
+
+int main()
+{
+    int num[]={1,5,30,32,64,56,159,120,21,17,35,45};
+    for(int i=0;i<sizeof(num)/sizeof(int);++i)
+        BitMap_set(num[i]);
+    //显示BitMap的前几行
+    int m;
+    cin>>m;
+    Show(m);
+    //查找某一个数是否存在
+    int n;
+    cin>>n;
+    if(BitMap_exit(n))
+        cout<<n<<"存在"<<endl;
+    else
+        cout<<n<<"不存在"<<endl;
+    return 0;
+}
