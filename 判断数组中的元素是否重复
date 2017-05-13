@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+#define Maxsize 100
+
+void duplicate(int numbers[],int length)
+{
+    int flag=0;
+    if(numbers == nullptr || length==0)
+        return;
+    for(int i=0;i<length;i++)
+        if(numbers[i]<0 || numbers[i]>length-1)
+            return;
+    for(int i=0;i<length;i++)
+    {
+        while(numbers[i]!=i)
+        {
+            if(numbers[i]==numbers[numbers[i]])
+            {
+                cout<<numbers[i]<<endl;
+                flag=1;
+                return;
+            }
+            int tmp=numbers[i];
+            numbers[i]=numbers[tmp];
+            numbers[tmp]=tmp;
+        }
+    }
+    if(flag==0)
+        cout<<"no depulate"<<endl;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int numbers[Maxsize];
+    for(int i=0;i<n;i++)
+        cin>>numbers[i];
+    duplicate(numbers,n);
+    return 0;
+}
